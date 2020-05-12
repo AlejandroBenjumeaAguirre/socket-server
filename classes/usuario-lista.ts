@@ -12,7 +12,7 @@ export class UsuariosLista {
     public agregar( usuario: Usuario ){
 
         this.lista.push( usuario );
-        console.log(usuario);
+        console.log(this.lista);
         return usuario
     }
 
@@ -38,24 +38,25 @@ export class UsuariosLista {
     // Obtener la lista de susuarios agregados a la lista
 
     public getLista(){
-        this.lista;
+        return this.lista.filter( usuario => usuario.nombre !== 'sin-nombre' );
     }
   
     //Obtener usuario
     public getUsuario( id: string ){
-        this.lista.find( usuario => usuario.id === id  );
+        return this.lista.find( usuario => usuario.id === id  );
     }
 
     //Obtener usuarios de una sala
-    public usuarisSala( sala: string ){
-        this.lista.filter( usuario => usuario.sala === sala );
+    public getUsuariosEnSala( sala: string ){
+        return this.lista.filter( usuario => usuario.sala === sala );
     }
 
+    // Borrar usuario
     public eliminarUsuario( id: string ){
 
         const tempUsuario = this.getUsuario( id );
 
-        this.lista = this.lista.filter( usuario => usuario.id === id );
+        this.lista = this.lista.filter( usuario => usuario.id !== id );
 
         return tempUsuario;
     }

@@ -43,13 +43,16 @@ export default class Server {
             /* console.log('cliente conectado'); */
 
             //conectar cliente
-            socket.conectarCliente( cliente );
+            socket.conectarCliente( cliente, this.io );
 
              //Configurar usuario
             socket.ConfigurandoUsuario(cliente, this.io);
 
+            // Obtener usuario activos
+            socket.obtenerUsuarios( cliente, this.io );
+
             //desconección
-            socket.desconectar( cliente );
+            socket.desconectar( cliente, this.io );
 
             //Mensaje
             socket.mensaje(cliente, this.io );
@@ -60,8 +63,8 @@ export default class Server {
 
     }
 
-    start( callback: any ) {
+    start( callback: Function ) {
         
-        this.httpserver.listen( this.port, callback);
+        this.httpserver.listen( this.port, callback );
     }
 }
